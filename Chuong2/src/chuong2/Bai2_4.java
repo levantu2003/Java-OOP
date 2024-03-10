@@ -4,6 +4,10 @@
  */
 package chuong2;
 
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import javax.swing.JButton;
+
 /**
  *
  * @author Kaiser
@@ -13,12 +17,194 @@ public class Bai2_4 extends javax.swing.JFrame {
     /**
      * Creates new form Bai2_4
      */
+    private double operand1;
+    private double operand2;
+    private char operator;
+    private boolean newNumber = true;
+    private char currentOperator;
+    private String expression = "";
+    private double result;
+
     public Bai2_4() {
         initComponents();
         setTitle("Máy tính");
         setLocationRelativeTo(null);
-        
-        
+
+        // Khởi tạo các nút số
+        JButton[] numberButtons = {btn0, btn1, btn2, btn3, btn4, btn5, btn6, btn7, btn8, btn9};
+
+        for (int i = 0; i < numberButtons.length; i++) {
+            addNumberButtonListener(numberButtons[i], String.valueOf(i));
+        }
+
+        // Khởi tạo các nút toán tử
+        JButton[] operationButtons = {btnCong, btnTru, btnNhan, btnChia, btnChiaDu};
+
+        for (JButton button : operationButtons) {
+            button.addActionListener(new ActionListener() {
+                @Override
+                public void actionPerformed(ActionEvent e) {
+                    if (!newNumber) {
+                        currentOperator = getOperator(button);
+                        operand1 = Double.parseDouble(txtKQ.getText()); // Lưu số hiện tại trước khi nhập toán tử
+                        operator = currentOperator; // Lưu toán tử
+                        expression += currentOperator;
+                        txtKQ.setText("");
+                        newNumber = true;
+                    }
+                }
+            });
+        }
+
+        // Nút clear
+        btnClear.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                clearDisplay();
+            }
+        });
+
+        //Nút chuyển âm/dương
+        btnAmDuong.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                chuyenDau();
+            }
+        });
+
+        // Nút lấy căn bậc 2
+        btnSQRT.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                double number;
+                try {
+                    number = Double.parseDouble(txtKQ.getText());
+                    if (number < 0) {
+                        txtKQ.setText("Không tính được căn bậc hai của số âm");
+                    } else {
+                        double result = Math.sqrt(number);
+                        txtKQ.setText(String.valueOf(result));
+                    }
+                } catch (NumberFormatException ex) {
+                    txtKQ.setText("Định dạng số không hợp lệ");
+                }
+            }
+        });
+
+        // Nút lấy nghịch đảo số
+        btnPS.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                double number;
+                try {
+                    number = Double.parseDouble(txtKQ.getText());
+                    if (number == 0) {
+                        txtKQ.setText("Chia cho 0");
+                    } else {
+                        double result = 1 / number;
+                        txtKQ.setText(String.valueOf(result));
+                    }
+                } catch (NumberFormatException ex) {
+                    txtKQ.setText("Định dạng số không hợp lệ");
+                }
+            }
+        });
+
+        // Nút show kết quả phép tính
+        btnKetQua.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                if (!newNumber) {
+                    operand2 = Double.parseDouble(txtKQ.getText());
+                    calculateResult();
+                    txtKQ.setText(String.valueOf(result));
+                    newNumber = true;
+                }
+            }
+        });
+
+    }
+
+    // Hàm update display
+    private void addNumberButtonListener(JButton button, final String number) {
+        button.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                updateDisplay(number);
+            }
+        });
+    }
+
+    private void updateDisplay(String text) {
+        if (!newNumber) {
+            String currentText = txtKQ.getText();
+            txtKQ.setText(currentText + text);
+        } else {
+            txtKQ.setText(text);
+            newNumber = false;
+        }
+    }
+
+    private void clearDisplay() {
+        txtKQ.setText("0");
+        operand1 = 0;
+        operator = ' ';
+        newNumber = true;
+    }
+
+    private void chuyenDau() {
+        String currentText = txtKQ.getText();
+        if (currentText.isEmpty()) {
+            return;
+        }
+
+        if (currentText.charAt(0) == '-') {
+            txtKQ.setText(currentText.substring(1));
+        } else {
+            txtKQ.setText('-' + currentText);
+        }
+    }
+
+    private void calculateResult() {
+        operand2 = Double.parseDouble(txtKQ.getText());
+        switch (operator) {
+            case '+':
+                result = operand1 + operand2;
+                break;
+            case '-':
+                result = operand1 - operand2;
+                break;
+            case '*':
+                result = operand1 * operand2;
+                break;
+            case '/':
+                if (operand2 == 0) {
+                    txtKQ.setText("Lỗi: Chia cho 0");
+                    return;
+                }
+                result = operand1 / operand2;
+                break;
+            case '%':
+                result = operand1 % operand2;
+                break;
+        }
+        operand1 = result;
+        newNumber = true;
+    }
+
+    private char getOperator(JButton button) {
+        if (button == btnCong) {
+            return '+';
+        } else if (button == btnTru) {
+            return '-';
+        } else if (button == btnNhan) {
+            return '*';
+        } else if (button == btnChia) {
+            return '/';
+        } else if (button == btnChiaDu) {
+            return '%';
+        }
+        return ' '; // Lỗi nếu không xác định được button
     }
 
     /**
@@ -55,7 +241,7 @@ public class Bai2_4 extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        txtKQ.setFont(new java.awt.Font("Segoe UI", 1, 36)); // NOI18N
+        txtKQ.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
         txtKQ.setHorizontalAlignment(javax.swing.JTextField.RIGHT);
         txtKQ.setText("0");
 
@@ -131,6 +317,11 @@ public class Bai2_4 extends javax.swing.JFrame {
 
         btnClear.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         btnClear.setText("C");
+        btnClear.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnClearActionPerformed(evt);
+            }
+        });
         jPanel1.add(btnClear);
 
         btnCong.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
@@ -169,10 +360,14 @@ public class Bai2_4 extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-    
+
     private void btnCongActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCongActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_btnCongActionPerformed
+
+    private void btnClearActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnClearActionPerformed
+
+    }//GEN-LAST:event_btnClearActionPerformed
 
     /**
      * @param args the command line arguments
@@ -181,7 +376,7 @@ public class Bai2_4 extends javax.swing.JFrame {
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
         /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
+         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html
          */
         try {
             for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {

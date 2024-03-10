@@ -92,6 +92,11 @@ public class Bai2_8 extends javax.swing.JFrame {
         });
 
         btnSaveFile.setText("Save To File");
+        btnSaveFile.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnSaveFileActionPerformed(evt);
+            }
+        });
 
         btnRemove.setText("Remove");
         btnRemove.addActionListener(new java.awt.event.ActionListener() {
@@ -251,6 +256,11 @@ public class Bai2_8 extends javax.swing.JFrame {
         txtLuong.setEnabled(false);
         txtTen.setEnabled(false);
     }//GEN-LAST:event_btnSaveActionPerformed
+
+    private void btnSaveFileActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSaveFileActionPerformed
+        JOptionPane.showMessageDialog(null, "Nút này em chưa làm :(");
+        return;
+    }//GEN-LAST:event_btnSaveFileActionPerformed
 
     /**
      * @param args the command line arguments
