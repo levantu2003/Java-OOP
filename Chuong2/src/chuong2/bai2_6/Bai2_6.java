@@ -4,6 +4,7 @@
  */
 package chuong2.bai2_6;
 
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
@@ -218,7 +219,7 @@ public class Bai2_6 extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    ArrayList<NhanVien> ds = new ArrayList<NhanVien>();
+    ArrayList<NhanVien> ds = new ArrayList<>();
     DefaultListModel listmodel = new DefaultListModel();
 
     private void btnLuuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLuuActionPerformed
@@ -286,7 +287,7 @@ public class Bai2_6 extends javax.swing.JFrame {
         sdf.applyPattern("dd-MM-yyyy");
         try {
             Date d = sdf.parse(txtNgayVL.getText());
-        } catch (Exception e) {
+        } catch (ParseException e) {
             sb.append("Ngày vào làm không nhập đúng định dạng dd-MM-yyyy");
         }
     }
@@ -319,10 +320,8 @@ public class Bai2_6 extends javax.swing.JFrame {
         //</editor-fold>
 
         /* Create and display the form */
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                new Bai2_6().setVisible(true);
-            }
+        java.awt.EventQueue.invokeLater(() -> {
+            new Bai2_6().setVisible(true);
         });
     }
 
