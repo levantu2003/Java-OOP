@@ -346,6 +346,7 @@ public class frmQLSV extends javax.swing.JFrame {
                 pf.println(S);
             }
             pf.close();
+            JOptionPane.showMessageDialog(this, "Dữ liệu đã được lưu vào file thành công!");
         } catch (Exception e) {
             JOptionPane.showMessageDialog(this, e);
         }
@@ -369,6 +370,7 @@ public class frmQLSV extends javax.swing.JFrame {
                 model.addRow(row);
             }
             br.close();
+            JOptionPane.showMessageDialog(this, "Dữ liệu đã được thêm vào bảng thành công!");
         } catch (Exception e) {
             JOptionPane.showMessageDialog(this, e);
         }
