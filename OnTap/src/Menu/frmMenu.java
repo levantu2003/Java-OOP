@@ -77,6 +77,11 @@ public class frmMenu extends javax.swing.JFrame {
         btnUser.setFocusable(false);
         btnUser.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         btnUser.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        btnUser.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnUserActionPerformed(evt);
+            }
+        });
         jToolBar1.add(btnUser);
 
         btnExit.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Menu/Icons/Icons/Icons_menu/shut_down.png"))); // NOI18N
@@ -290,6 +295,10 @@ public class frmMenu extends javax.swing.JFrame {
             }
         }
     }//GEN-LAST:event_miOpenActionPerformed
+
+    private void btnUserActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnUserActionPerformed
+        showAboutUs();
+    }//GEN-LAST:event_btnUserActionPerformed
 
     private void showAboutUs() {
         String str = "About me";
