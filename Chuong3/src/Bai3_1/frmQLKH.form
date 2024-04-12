@@ -118,21 +118,33 @@
       <Properties>
         <Property name="text" type="java.lang.String" value="|&lt;"/>
       </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnFirstActionPerformed"/>
+      </Events>
     </Component>
     <Component class="javax.swing.JButton" name="btnNext">
       <Properties>
         <Property name="text" type="java.lang.String" value="&gt;"/>
       </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnNextActionPerformed"/>
+      </Events>
     </Component>
     <Component class="javax.swing.JButton" name="btnLast">
       <Properties>
         <Property name="text" type="java.lang.String" value="&gt;|"/>
       </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnLastActionPerformed"/>
+      </Events>
     </Component>
     <Component class="javax.swing.JButton" name="btnPrevious">
       <Properties>
         <Property name="text" type="java.lang.String" value="&lt;"/>
       </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnPreviousActionPerformed"/>
+      </Events>
     </Component>
     <Container class="javax.swing.JScrollPane" name="jScrollPane1">
       <AuxValues>
@@ -151,6 +163,9 @@
               </Table>
             </Property>
           </Properties>
+          <Events>
+            <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="tbKHMouseClicked"/>
+          </Events>
         </Component>
       </SubComponents>
     </Container>
@@ -186,16 +201,25 @@
       <Properties>
         <Property name="text" type="java.lang.String" value="Th&#xea;m"/>
       </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnThemActionPerformed"/>
+      </Events>
     </Component>
     <Component class="javax.swing.JButton" name="btnLuu">
       <Properties>
         <Property name="text" type="java.lang.String" value="L&#x1b0;u"/>
       </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnLuuActionPerformed"/>
+      </Events>
     </Component>
     <Component class="javax.swing.JButton" name="btnXoa">
       <Properties>
         <Property name="text" type="java.lang.String" value="Xo&#xe1;"/>
       </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnXoaActionPerformed"/>
+      </Events>
     </Component>
   </SubComponents>
 </Form>

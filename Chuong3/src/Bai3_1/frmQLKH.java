@@ -7,6 +7,12 @@ package Bai3_1;
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.Statement;
+import java.sql.PreparedStatement;
+import java.sql.DriverManager;
+import java.util.ArrayList;
+import java.util.List;
+import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
 
 /**
  *
@@ -19,7 +25,14 @@ public class frmQLKH extends javax.swing.JFrame {
      */
     public frmQLKH() {
         initComponents();
+        setTitle("Quản Lý Khách Hàng");
+        setLocationRelativeTo(null);
+        loadDataToList();
+        fillToTable();
     }
+    List<KhachHang> list = new ArrayList<>();
+    DefaultTableModel tblModel = new DefaultTableModel();
+    int index = 0;
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -51,12 +64,32 @@ public class frmQLKH extends javax.swing.JFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
         btnFirst.setText("|<");
+        btnFirst.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnFirstActionPerformed(evt);
+            }
+        });
 
         btnNext.setText(">");
+        btnNext.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnNextActionPerformed(evt);
+            }
+        });
 
         btnLast.setText(">|");
+        btnLast.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnLastActionPerformed(evt);
+            }
+        });
 
         btnPrevious.setText("<");
+        btnPrevious.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnPreviousActionPerformed(evt);
+            }
+        });
 
         tbKH.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -77,6 +110,11 @@ public class frmQLKH extends javax.swing.JFrame {
                 return canEdit [columnIndex];
             }
         });
+        tbKH.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                tbKHMouseClicked(evt);
+            }
+        });
         jScrollPane1.setViewportView(tbKH);
 
         jLabel1.setText("Mã KH");
@@ -88,10 +126,25 @@ public class frmQLKH extends javax.swing.JFrame {
         jLabel4.setText("Mã Nhóm");
 
         btnThem.setText("Thêm");
+        btnThem.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnThemActionPerformed(evt);
+            }
+        });
 
         btnLuu.setText("Lưu");
+        btnLuu.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnLuuActionPerformed(evt);
+            }
+        });
 
         btnXoa.setText("Xoá");
+        btnXoa.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnXoaActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -172,18 +225,76 @@ public class frmQLKH extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    private void tbKHMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbKHMouseClicked
+        showForm(index);
+    }//GEN-LAST:event_tbKHMouseClicked
+
+    private void btnXoaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnXoaActionPerformed
+        xoaKhachHang();
+        loadDataToList();
+        fillToTable();
+    }//GEN-LAST:event_btnXoaActionPerformed
+
+    private void btnFirstActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnFirstActionPerformed
+        int firstRow = 0;
+        if (tbKH.getRowCount() > 0) {
+            tbKH.setRowSelectionInterval(firstRow, firstRow);
+        }
+        showForm(firstRow);
+    }//GEN-LAST:event_btnFirstActionPerformed
+
+    private void btnNextActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNextActionPerformed
+        int selectedRow = tbKH.getSelectedRow();
+        int nextRow = selectedRow + 1;
+        if (nextRow < tbKH.getRowCount()) {
+            tbKH.setRowSelectionInterval(nextRow, nextRow);
+            showForm(nextRow);
+        } else {
+            JOptionPane.showMessageDialog(this, "Đang ở cuối danh sách");
+        }
+    }//GEN-LAST:event_btnNextActionPerformed
+
+    private void btnPreviousActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPreviousActionPerformed
+        int selectedRow = tbKH.getSelectedRow();
+        int previousRow = selectedRow - 1;
+        if (previousRow >= 0) {
+            tbKH.setRowSelectionInterval(previousRow, previousRow);
+            showForm(previousRow);
+        } else {
+            JOptionPane.showMessageDialog(this, "Đang ở đầu danh sách");
+        }
+    }//GEN-LAST:event_btnPreviousActionPerformed
+
+    private void btnLastActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLastActionPerformed
+        int lastRow = tbKH.getRowCount() - 1;
+        if (lastRow >= 0) {
+            tbKH.setRowSelectionInterval(lastRow, lastRow);
+        }
+        showForm(lastRow);
+    }//GEN-LAST:event_btnLastActionPerformed
+
+    private void btnLuuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLuuActionPerformed
+        saveKhachHang();
+    }//GEN-LAST:event_btnLuuActionPerformed
+
+    private void btnThemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnThemActionPerformed
+        themKhachHang();
+    }//GEN-LAST:event_btnThemActionPerformed
+
     // Kết nối dữ liệu
     public static Connection ketnoiCSDL() {
         Connection con = null;
         try {
-            System.out.println("Khởi chạy driver...");
+            System.out.println("Khoi chay driver...");
             String driver = "com.microsoft.sqlserver.jdbc.SQLServerDriver";
             Class.forName(driver);
 
-            System.out.println("Đang kết nối...");
+            System.out.println("Dang ket noi...");
             String user = "sa";
             String pass = "123";
             String url = "jdbc:sqlserver://localhost:1433;databaseName=QuanLyKhachHang;integratedSecurity=false;encrypt=false;trustServerCertificate=true;";
+            con = DriverManager.getConnection(url, user, pass);
+            System.out.println("Ket noi thanh cong");
 
         } catch (Exception e) {
             e.printStackTrace();
@@ -196,8 +307,117 @@ public class frmQLKH extends javax.swing.JFrame {
             Statement st = ketnoiCSDL().createStatement();
             String sql = "Select * from KhachHang";
             ResultSet rs = st.executeQuery(sql);
+            list.clear();
+            while (rs.next()) {
+                String maKH, tenKH, maNhom;
+                int namSinh;
+                maKH = rs.getString(1);
+                tenKH = rs.getString(2);
+                namSinh = rs.getInt(3);
+                maNhom = rs.getString(4);
+                KhachHang kh = new KhachHang(maKH, tenKH, namSinh, maNhom);
+                list.add(kh);
+            }
 
         } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void fillToTable() {
+        tblModel = (DefaultTableModel) tbKH.getModel();
+        tblModel.setRowCount(0);
+
+        for (KhachHang kh : list) {
+            Object[] row = new Object[]{kh.maKH, kh.tenKH, kh.namSinh};
+            tblModel.addRow(row);
+        }
+    }
+
+    public void showForm(int index) {
+        index = tbKH.getSelectedRow();
+        KhachHang kh = list.get(index);
+        txtMaKH.setText(kh.maKH);
+        txtTenKH.setText(kh.tenKH);
+        txtNamSinh.setText(String.valueOf(kh.namSinh));
+        txtMaNhom.setText(kh.maNhom);
+    }
+
+    public void clearForm() {
+        txtMaKH.setText("");
+        txtTenKH.setText("");
+        txtNamSinh.setText("");
+        txtMaKH.requestFocus();
+    }
+
+    public void xoaKhachHang() {
+        index = tbKH.getSelectedRow();
+        if (index < 0) {
+            JOptionPane.showMessageDialog(this, "Chọn 1 khách hàng cần xóa");
+            return;
+        }
+        KhachHang kh = new KhachHang();
+        kh = list.get(index);
+        String maSelected = kh.maKH;
+        String sqlDelete = "Delete KhachHang Where MaKH=?";
+        try {
+            PreparedStatement st = ketnoiCSDL().prepareStatement(sqlDelete);
+            st.setString(1, maSelected);
+            int x = st.executeUpdate();
+            if (x > 0) {
+                JOptionPane.showMessageDialog(this, "Xóa thành công");
+            } else {
+                JOptionPane.showMessageDialog(this, "Xóa thất bại");
+            }
+            ketnoiCSDL().close();
+            loadDataToList();
+            showForm(index--);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void saveKhachHang() {
+        try {
+            String sqlInsert = "Insert into KhachHang Values(?, ?, ?, ?)";
+            PreparedStatement st = ketnoiCSDL().prepareStatement(sqlInsert);
+            st.setString(1, txtMaKH.getText());
+            st.setString(2, txtTenKH.getText());
+            st.setInt(3, Integer.parseInt(txtNamSinh.getText()));
+            st.setString(4, txtMaNhom.getText());
+            int x = st.executeUpdate();
+            if (x > 0) {
+                JOptionPane.showMessageDialog(this, "Thêm thành công");
+            } else {
+                JOptionPane.showMessageDialog(this, "Thêm thất bại");
+            }
+            ketnoiCSDL().close();
+            loadDataToList();
+            fillToTable();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void themKhachHang() {
+        try {
+            String sqlInsert = "Insert into KhachHang Values(?, ?, ?, ?)";
+            PreparedStatement st = ketnoiCSDL().prepareStatement(sqlInsert);
+            st.setString(1, txtMaKH.getText());
+            st.setString(2, txtTenKH.getText());
+            st.setInt(3, Integer.parseInt(txtNamSinh.getText()));
+            st.setString(4, txtMaNhom.getText());
+            int x = st.executeUpdate();
+            if (x > 0) {
+                JOptionPane.showMessageDialog(this, "Thêm thành công");
+            } else {
+                JOptionPane.showMessageDialog(this, "Thêm thất bại");
+            }
+            ketnoiCSDL().close();
+            loadDataToList();
+            fillToTable();
+        } catch (Exception e) {
+            e.printStackTrace();
         }
     }
 
