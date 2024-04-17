@@ -22,3 +22,32 @@ VALUES
 
 select * from CDDVDCollection
 
+GO
+CREATE PROCEDURE sp_LietKeAllCDDVD
+AS
+BEGIN
+    SELECT * FROM CDDVDCollection;
+END
+GO
+
+CREATE PROCEDURE sp_LietKeAllCDDVDTheoNam
+    @NamXB INT
+AS
+BEGIN
+    SELECT * 
+    FROM CDDVDCollection
+    WHERE NamXB = @NamXB;
+END
+GO
+
+CREATE PROCEDURE sp_LietKeAllCDDVDTheoNamVaTheLoai
+    @NamXB INT,
+    @LoaiDia NVARCHAR(10)
+AS
+BEGIN
+    SELECT * 
+    FROM CDDVDCollection
+    WHERE NamXB = @NamXB
+        AND LoaiDia = @LoaiDia;
+END
+GO

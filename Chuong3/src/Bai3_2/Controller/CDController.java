@@ -11,6 +11,7 @@ import java.sql.Connection;
 import java.sql.Statement;
 import java.sql.ResultSet;
 import java.sql.PreparedStatement;
+import java.sql.CallableStatement;
 
 /**
  *
@@ -107,4 +108,85 @@ public class CDController {
         }
         return listCD;
     }
+
+    public List<CD> proc_showALL() {
+        List<CD> list = new ArrayList<>();
+        try {
+            String sql = "{call sp_LietKeAllCDDVD}";
+            Connection con = KetNoiCSDL.ketnoiCSDL();
+            CallableStatement cstm = con.prepareCall(sql);
+            ResultSet rs = cstm.executeQuery();
+
+            while (rs.next()) {
+                CD cd = new CD();
+                cd.setMa(rs.getString("Ma"));
+                cd.setTieuDe(rs.getString("TieuDe"));
+                cd.setLoai(rs.getString("LoaiDia"));
+                cd.setNamXB(rs.getInt("NamXB"));
+                list.add(cd);
+            }
+
+            rs.close();
+            cstm.close();
+            con.close();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return list;
+    }
+
+    public List<CD> proc_showAllTheoNam(int namXB) {
+        List<CD> list = new ArrayList<>();
+        try {
+            String sql = "{call sp_LietKeAllCDDVDTheoNam(?)}";
+            Connection con = KetNoiCSDL.ketnoiCSDL();
+            CallableStatement cstm = con.prepareCall(sql);
+            cstm.setInt(1, namXB);
+            ResultSet rs = cstm.executeQuery();
+
+            while (rs.next()) {
+                CD cd = new CD();
+                cd.setMa(rs.getString("Ma"));
+                cd.setTieuDe(rs.getString("TieuDe"));
+                cd.setLoai(rs.getString("LoaiDia"));
+                cd.setNamXB(rs.getInt("NamXB"));
+                list.add(cd);
+            }
+
+            rs.close();
+            cstm.close();
+            con.close();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return list;
+    }
+
+    public List<CD> proc_showAllheoNamVaTheLoai(int namXB, String loaiDia) {
+        List<CD> list = new ArrayList<>();
+        try {
+            String sql = "{call sp_LietKeAllCDDVDTheoNamVaTheLoai(?, ?)}";
+            Connection con = KetNoiCSDL.ketnoiCSDL();
+            CallableStatement cstm = con.prepareCall(sql);
+            cstm.setInt(1, namXB);
+            cstm.setString(2, loaiDia);
+            ResultSet rs = cstm.executeQuery();
+
+            while (rs.next()) {
+                CD cd = new CD();
+                cd.setMa(rs.getString("Ma"));
+                cd.setTieuDe(rs.getString("TieuDe"));
+                cd.setLoai(rs.getString("LoaiDia"));
+                cd.setNamXB(rs.getInt("NamXB"));
+                list.add(cd);
+            }
+            rs.close();
+            cstm.close();
+            con.close();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return list;
+    }
+
 }
