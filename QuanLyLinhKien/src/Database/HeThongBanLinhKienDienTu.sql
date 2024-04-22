@@ -1,3 +1,6 @@
+use master
+go
+
 CREATE DATABASE BanLinhKienDienTu
 go
 
