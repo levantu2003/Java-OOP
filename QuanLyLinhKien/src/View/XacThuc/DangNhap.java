@@ -4,8 +4,12 @@
  */
 package View.XacThuc;
 
+import static Controller.KiemSoatLoiInput.kiemtraEmail;
+import static Controller.KiemSoatLoiInput.kiemtraTrongInput;
+import java.awt.HeadlessException;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
+import javax.swing.JTextField;
 
 /**
  *
@@ -35,12 +39,12 @@ public class DangNhap extends javax.swing.JFrame {
         lbEmail = new javax.swing.JLabel();
         txtEmail = new javax.swing.JTextField();
         lbMatKhau = new javax.swing.JLabel();
-        txtMatKhau = new javax.swing.JTextField();
         lbDangNhap = new javax.swing.JLabel();
         btnLogIn = new javax.swing.JButton();
         jCheckBox1 = new javax.swing.JCheckBox();
         txtQuenMK = new javax.swing.JLabel();
         txtTaoTKMoi = new javax.swing.JLabel();
+        txtMatKhau = new javax.swing.JPasswordField();
         Background = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -61,11 +65,6 @@ public class DangNhap extends javax.swing.JFrame {
         lbMatKhau.setForeground(new java.awt.Color(255, 255, 255));
         lbMatKhau.setText("Mật Khẩu:");
 
-        txtMatKhau.setBackground(new java.awt.Color(175, 217, 243));
-        txtMatKhau.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        txtMatKhau.setBorder(javax.swing.BorderFactory.createMatteBorder(0, 0, 2, 0, new java.awt.Color(255, 255, 255)));
-        txtMatKhau.setOpaque(true);
-
         lbDangNhap.setFont(new java.awt.Font("Segoe UI", 1, 20)); // NOI18N
         lbDangNhap.setForeground(new java.awt.Color(255, 255, 255));
         lbDangNhap.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/SignIn_Header.png"))); // NOI18N
@@ -75,6 +74,11 @@ public class DangNhap extends javax.swing.JFrame {
         btnLogIn.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         btnLogIn.setForeground(new java.awt.Color(255, 255, 255));
         btnLogIn.setText("Login");
+        btnLogIn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnLogInActionPerformed(evt);
+            }
+        });
 
         jCheckBox1.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         jCheckBox1.setForeground(new java.awt.Color(255, 255, 255));
@@ -98,6 +102,10 @@ public class DangNhap extends javax.swing.JFrame {
             }
         });
 
+        txtMatKhau.setBackground(new java.awt.Color(175, 217, 243));
+        txtMatKhau.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        txtMatKhau.setBorder(javax.swing.BorderFactory.createMatteBorder(0, 0, 2, 0, new java.awt.Color(255, 255, 255)));
+
         javax.swing.GroupLayout pnDangNhapLayout = new javax.swing.GroupLayout(pnDangNhap);
         pnDangNhap.setLayout(pnDangNhapLayout);
         pnDangNhapLayout.setHorizontalGroup(
@@ -111,17 +119,20 @@ public class DangNhap extends javax.swing.JFrame {
                         .addGap(75, 75, 75)
                         .addGroup(pnDangNhapLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(pnDangNhapLayout.createSequentialGroup()
-                                .addComponent(lbEmail, javax.swing.GroupLayout.PREFERRED_SIZE, 72, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(8, 8, 8)
-                                .addComponent(txtEmail, javax.swing.GroupLayout.PREFERRED_SIZE, 320, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(pnDangNhapLayout.createSequentialGroup()
-                                .addComponent(lbMatKhau, javax.swing.GroupLayout.PREFERRED_SIZE, 72, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(8, 8, 8)
-                                .addComponent(txtMatKhau, javax.swing.GroupLayout.PREFERRED_SIZE, 320, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(pnDangNhapLayout.createSequentialGroup()
                                 .addComponent(jCheckBox1, javax.swing.GroupLayout.PREFERRED_SIZE, 154, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 157, Short.MAX_VALUE)
-                                .addComponent(txtQuenMK, javax.swing.GroupLayout.PREFERRED_SIZE, 109, javax.swing.GroupLayout.PREFERRED_SIZE)))))
+                                .addComponent(txtQuenMK, javax.swing.GroupLayout.PREFERRED_SIZE, 109, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(pnDangNhapLayout.createSequentialGroup()
+                                .addGroup(pnDangNhapLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                    .addGroup(pnDangNhapLayout.createSequentialGroup()
+                                        .addComponent(lbEmail, javax.swing.GroupLayout.PREFERRED_SIZE, 72, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addGap(8, 8, 8)
+                                        .addComponent(txtEmail, javax.swing.GroupLayout.PREFERRED_SIZE, 320, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addGroup(pnDangNhapLayout.createSequentialGroup()
+                                        .addComponent(lbMatKhau, javax.swing.GroupLayout.PREFERRED_SIZE, 72, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addComponent(txtMatKhau)))
+                                .addGap(0, 0, Short.MAX_VALUE)))))
                 .addGap(73, 73, 73))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnDangNhapLayout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -143,7 +154,7 @@ public class DangNhap extends javax.swing.JFrame {
                     .addComponent(lbEmail)
                     .addComponent(txtEmail, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(38, 38, 38)
-                .addGroup(pnDangNhapLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(pnDangNhapLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(lbMatKhau)
                     .addComponent(txtMatKhau, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
@@ -176,6 +187,33 @@ public class DangNhap extends javax.swing.JFrame {
         dk.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         dk.setVisible(true);
     }//GEN-LAST:event_txtTaoTKMoiMouseClicked
+
+    private void btnLogInActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLogInActionPerformed
+        kiemtraHopLe(txtEmail, txtMatKhau);
+    }//GEN-LAST:event_btnLogInActionPerformed
+
+    public static void kiemtraHopLe(JTextField txtEmail, JTextField txtMatKhau) {
+        try {
+            String email = txtEmail.getText();
+            String matKhau = txtMatKhau.getText();
+            String thongBaoLoi = "";
+
+            if (kiemtraTrongInput(matKhau)) {
+                thongBaoLoi += "Mật khẩu không được để trống\n";
+            }
+            if (kiemtraTrongInput(email)) {
+                thongBaoLoi += "Email không được để trống\n";
+            } else if (!kiemtraEmail(email)) {
+                JOptionPane.showMessageDialog(null, "Email không hợp lệ");
+                return;
+            }
+            if (!thongBaoLoi.isEmpty()) {
+                JOptionPane.showMessageDialog(null, thongBaoLoi.trim());
+            }
+
+        } catch (HeadlessException e) {
+        }
+    }
 
     /**
      * @param args the command line arguments
@@ -221,7 +259,7 @@ public class DangNhap extends javax.swing.JFrame {
     private javax.swing.JLabel lbMatKhau;
     private javax.swing.JPanel pnDangNhap;
     private javax.swing.JTextField txtEmail;
-    private javax.swing.JTextField txtMatKhau;
+    private javax.swing.JPasswordField txtMatKhau;
     private javax.swing.JLabel txtQuenMK;
     private javax.swing.JLabel txtTaoTKMoi;
     // End of variables declaration//GEN-END:variables

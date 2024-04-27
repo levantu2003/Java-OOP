@@ -4,6 +4,13 @@
  */
 package View.XacThuc;
 
+import static Controller.KiemSoatLoiInput.kiemtraEmail;
+import static Controller.KiemSoatLoiInput.kiemtraTrongInput;
+import java.awt.HeadlessException;
+import javax.swing.JFrame;
+import javax.swing.JOptionPane;
+import javax.swing.JTextField;
+
 /**
  *
  * @author Kaiser
@@ -28,7 +35,7 @@ public class QuenMatKhau extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        pnDangKy = new javax.swing.JPanel();
+        pnQuenMatKhau = new javax.swing.JPanel();
         lbEmail = new javax.swing.JLabel();
         txtEmail = new javax.swing.JTextField();
         lbDangKy = new javax.swing.JLabel();
@@ -39,7 +46,7 @@ public class QuenMatKhau extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        pnDangKy.setBackground(new java.awt.Color(175, 217, 243));
+        pnQuenMatKhau.setBackground(new java.awt.Color(175, 217, 243));
 
         lbEmail.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         lbEmail.setForeground(new java.awt.Color(255, 255, 255));
@@ -73,53 +80,58 @@ public class QuenMatKhau extends javax.swing.JFrame {
         btnQuenMK.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         btnQuenMK.setForeground(new java.awt.Color(255, 255, 255));
         btnQuenMK.setText("Hoàn tất");
+        btnQuenMK.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnQuenMKActionPerformed(evt);
+            }
+        });
 
-        javax.swing.GroupLayout pnDangKyLayout = new javax.swing.GroupLayout(pnDangKy);
-        pnDangKy.setLayout(pnDangKyLayout);
-        pnDangKyLayout.setHorizontalGroup(
-            pnDangKyLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(pnDangKyLayout.createSequentialGroup()
-                .addGroup(pnDangKyLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(pnDangKyLayout.createSequentialGroup()
+        javax.swing.GroupLayout pnQuenMatKhauLayout = new javax.swing.GroupLayout(pnQuenMatKhau);
+        pnQuenMatKhau.setLayout(pnQuenMatKhauLayout);
+        pnQuenMatKhauLayout.setHorizontalGroup(
+            pnQuenMatKhauLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(pnQuenMatKhauLayout.createSequentialGroup()
+                .addGroup(pnQuenMatKhauLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(pnQuenMatKhauLayout.createSequentialGroup()
                         .addGap(195, 195, 195)
                         .addComponent(lbDangKy, javax.swing.GroupLayout.PREFERRED_SIZE, 267, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(pnDangKyLayout.createSequentialGroup()
+                    .addGroup(pnQuenMatKhauLayout.createSequentialGroup()
                         .addGap(50, 50, 50)
-                        .addGroup(pnDangKyLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addGroup(pnDangKyLayout.createSequentialGroup()
+                        .addGroup(pnQuenMatKhauLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addGroup(pnQuenMatKhauLayout.createSequentialGroup()
                                 .addComponent(lbMaXacThuc, javax.swing.GroupLayout.PREFERRED_SIZE, 101, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(47, 47, 47)
                                 .addComponent(txtMaXacThuc, javax.swing.GroupLayout.PREFERRED_SIZE, 151, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                 .addComponent(btnLayCode, javax.swing.GroupLayout.PREFERRED_SIZE, 128, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(pnDangKyLayout.createSequentialGroup()
+                            .addGroup(pnQuenMatKhauLayout.createSequentialGroup()
                                 .addComponent(lbEmail, javax.swing.GroupLayout.PREFERRED_SIZE, 72, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(76, 76, 76)
                                 .addComponent(txtEmail, javax.swing.GroupLayout.PREFERRED_SIZE, 320, javax.swing.GroupLayout.PREFERRED_SIZE)))))
                 .addContainerGap(82, Short.MAX_VALUE))
-            .addGroup(pnDangKyLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnDangKyLayout.createSequentialGroup()
+            .addGroup(pnQuenMatKhauLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnQuenMatKhauLayout.createSequentialGroup()
                     .addContainerGap(208, Short.MAX_VALUE)
                     .addComponent(btnQuenMK, javax.swing.GroupLayout.PREFERRED_SIZE, 217, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGap(175, 175, 175)))
         );
-        pnDangKyLayout.setVerticalGroup(
-            pnDangKyLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(pnDangKyLayout.createSequentialGroup()
+        pnQuenMatKhauLayout.setVerticalGroup(
+            pnQuenMatKhauLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(pnQuenMatKhauLayout.createSequentialGroup()
                 .addGap(15, 15, 15)
                 .addComponent(lbDangKy)
                 .addGap(56, 56, 56)
-                .addGroup(pnDangKyLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(pnQuenMatKhauLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(lbEmail)
                     .addComponent(txtEmail, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(31, 31, 31)
-                .addGroup(pnDangKyLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(pnQuenMatKhauLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(lbMaXacThuc)
                     .addComponent(txtMaXacThuc, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btnLayCode, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(96, Short.MAX_VALUE))
-            .addGroup(pnDangKyLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnDangKyLayout.createSequentialGroup()
+            .addGroup(pnQuenMatKhauLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnQuenMatKhauLayout.createSequentialGroup()
                     .addContainerGap(254, Short.MAX_VALUE)
                     .addComponent(btnQuenMK, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGap(30, 30, 30)))
@@ -133,7 +145,7 @@ public class QuenMatKhau extends javax.swing.JFrame {
             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(layout.createSequentialGroup()
                     .addGap(0, 0, Short.MAX_VALUE)
-                    .addComponent(pnDangKy, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(pnQuenMatKhau, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGap(0, 0, Short.MAX_VALUE)))
         );
         layout.setVerticalGroup(
@@ -142,12 +154,42 @@ public class QuenMatKhau extends javax.swing.JFrame {
             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(layout.createSequentialGroup()
                     .addGap(0, 0, Short.MAX_VALUE)
-                    .addComponent(pnDangKy, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(pnQuenMatKhau, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGap(0, 0, Short.MAX_VALUE)))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void btnQuenMKActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnQuenMKActionPerformed
+        kiemtraHopLe(txtEmail, txtMaXacThuc, this);
+    }//GEN-LAST:event_btnQuenMKActionPerformed
+
+    public static void kiemtraHopLe(JTextField txtEmail, JTextField txtMaXacThuc, JFrame pnQuenMatKhau) {
+        try {
+            String email = txtEmail.getText();
+            String ma = txtMaXacThuc.getText();
+            String thongBaoLoi = "";
+
+            if (kiemtraTrongInput(ma)) {
+                thongBaoLoi += "Mã xác thực không được để trống\n";
+            }
+            if (kiemtraTrongInput(email)) {
+                thongBaoLoi += "Email không được để trống\n";
+            } else if (!kiemtraEmail(email)) {
+                JOptionPane.showMessageDialog(null, "Email không hợp lệ");
+                return;
+            }
+            if (!thongBaoLoi.isEmpty()) {
+                JOptionPane.showMessageDialog(null, thongBaoLoi.trim());
+            } else {
+                JOptionPane.showMessageDialog(null, "Mật khẩu đã được gửi tới email" + email);
+                pnQuenMatKhau.dispose();
+            }
+
+        } catch (HeadlessException e) {
+        }
+    }
 
     /**
      * @param args the command line arguments
@@ -190,7 +232,7 @@ public class QuenMatKhau extends javax.swing.JFrame {
     private javax.swing.JLabel lbDangKy;
     private javax.swing.JLabel lbEmail;
     private javax.swing.JLabel lbMaXacThuc;
-    private javax.swing.JPanel pnDangKy;
+    private javax.swing.JPanel pnQuenMatKhau;
     private javax.swing.JTextField txtEmail;
     private javax.swing.JTextField txtMaXacThuc;
     // End of variables declaration//GEN-END:variables
