@@ -4,10 +4,6 @@
  */
 package Bai3_5.View;
 
-import Bai3_5.Controller.DBController;
-import Bai3_5.Model.NguoiDung;
-import javax.swing.JOptionPane;
-
 /**
  *
  * @author Kaiser
@@ -139,27 +135,27 @@ public class frmDangNhap extends javax.swing.JDialog {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnDangNhapActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDangNhapActionPerformed
-        boolean isValid = kiemtraHopLe(txtEmail, txtMatKhau);
-        if (isValid) {
-            String user = txtEmail.getText();
-            String password = String.valueOf(txtMatKhau.getPassword());
-
-            // Mã hóa mật khẩu sử dụng MD5
-            String hashedPassword = hashPassword(password);
-
-            XacThucDAO lg = new XacThucDAO();
-            NguoiDung ndl = lg.dangNhap(user, hashedPassword);
-
-            if (ndl == null) {
-                JOptionPane.showMessageDialog(null, "Email hoặc mật khẩu sai");
-            } else {
-                JOptionPane.showMessageDialog(null, "Đăng nhập thành công");
-                // MainFrame main = new MainFrame();
-                // main.setVisible(true);
-                // ketquaDangNhap = true;
-                this.dispose();
-            }
-        }
+//        boolean isValid = kiemtraHopLe(txtEmail, txtMatKhau);
+//        if (isValid) {
+//            String user = txtEmail.getText();
+//            String password = String.valueOf(txtMatKhau.getPassword());
+//
+//            // Mã hóa mật khẩu sử dụng MD5
+//            String hashedPassword = hashPassword(password);
+//
+//            XacThucDAO lg = new XacThucDAO();
+//            NguoiDung ndl = lg.dangNhap(user, hashedPassword);
+//
+//            if (ndl == null) {
+//                JOptionPane.showMessageDialog(null, "Email hoặc mật khẩu sai");
+//            } else {
+//                JOptionPane.showMessageDialog(null, "Đăng nhập thành công");
+//                // MainFrame main = new MainFrame();
+//                // main.setVisible(true);
+//                // ketquaDangNhap = true;
+//                this.dispose();
+//            }
+//        }
     }//GEN-LAST:event_btnDangNhapActionPerformed
 
     private void btnThoatActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnThoatActionPerformed
